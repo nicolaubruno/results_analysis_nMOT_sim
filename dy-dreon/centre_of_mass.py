@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.pardir) + "/auxiliar/")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from plots import single_plot
-from data import simulation_data
+from data import centre_of_mass_data
 
 experiment_B_1_71_df = pd.read_csv(
     "../data/experiment/centre_of_mass_B_1_71.csv",
@@ -23,6 +23,6 @@ experiment_B_1_71 = (
 
 single_plot(
     experiment_B_1_71,
-    simulation_data(),
+    centre_of_mass_data(),
     x_label=r"$\Delta\ [2\pi \times MHz]$",
     y_label=r"$z_c\ [mm]$")
