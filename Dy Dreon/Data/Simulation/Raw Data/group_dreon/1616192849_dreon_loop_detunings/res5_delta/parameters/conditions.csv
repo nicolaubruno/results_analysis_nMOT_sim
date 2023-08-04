@@ -1,7 +1,0 @@
-,conditions
-T_0,20.0
-i_max,20000.0
-r_max,2.0
-num_sim,4000
-num_bins,128
-ini_iters,10000.0
