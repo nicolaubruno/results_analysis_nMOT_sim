@@ -1,0 +1,7 @@
+,conditions
+T_0,5.0
+i_max,20000.0
+r_max,3.0
+num_sim,65536
+num_bins,128
+ini_iters,10000.0

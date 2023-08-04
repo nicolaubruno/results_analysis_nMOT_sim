@@ -1,0 +1,9 @@
+,conditions
+T_0,20.0
+max_time,30000.0
+r_max,1.5
+num_sim,1000
+num_bins,128
+wait_time,15000.0
+dt,1.0
+parallel_tasks,8.0
