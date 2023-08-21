@@ -9,8 +9,14 @@ paper_data = pd.read_csv("paper_data.csv", header=0)
 
 # Regime (II): Theoretical
 gamma = 2 * np.pi * 7.5e3 # Hz
-T = lambda s: ((6.626070040 * gamma * np.sqrt(1 + s)) / (2 * 2 * np.pi * 1.38064852)) * 1e-5 # mu K
+hbar = 1.054571817e-34
+kB = 1.380649e-23
+#T = lambda s: ((6.626070040 * gamma * np.sqrt(1 + s)) / (2 * 2 * np.pi * 1.38064852)) * 1e-5 # mu K
+T = lambda s: np.sqrt(1 + s) * (hbar * gamma) / (2 * kB) * 1e6 # mu K
 s = np.linspace(np.min(paper_data.iloc[:,0]), np.max(paper_data.iloc[:,0]), 1000)
+
+print(np.sqrt(1 + 0.65) * (hbar * 2 * np.pi * 136e3) / (2 * kB) * 1e6)
+#exit(0)
 
 
 # Fitting
@@ -42,8 +48,8 @@ plt.plot(paper_data.iloc[:,0], paper_data.iloc[:,1], marker="o", linestyle="", l
 plt.plot(s, [T(si) for si in s], marker="", linestyle="--", color="black", label="Theoretical Curve")
 #plt.plot(x, y2*10, marker="", linestyle="-", color="black", label=("Fitting \nSlope Error: %.1f" % (100*(1 - m_theory / m2))) + r"%")
 
-plt.xscale("log")
-plt.yscale("log")
+#plt.xscale("log")
+#plt.yscale("log")
 plt.xlabel(r"$s$")
 plt.ylabel(r"$T [\mu K]$")
 

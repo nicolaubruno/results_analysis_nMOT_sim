@@ -8,42 +8,63 @@ def single_plot(*data, **kwargs):
     # Arguments
     x_label = kwargs["x_label"] if "x_label" in kwargs else None
     y_label = kwargs["y_label"] if "y_label" in kwargs else None
+    figsize = kwargs["figsize"] if "figsize" in kwargs else (7,6)
+    fontsize = kwargs["fontsize"] if "fontsize" in kwargs else 14
 
     # Clear plot
     plt.clf()
+    plt.figure(figsize=figsize)
 
     # Settings
     plt.style.use('seaborn-whitegrid')
-    plt.rcParams.update({"font.size":14})
+    plt.rcParams.update({"font.size":fontsize})
 
-    plt.xlabel(x_label, fontsize=14)
-    plt.ylabel(y_label, fontsize=14)
+    plt.xlabel(x_label, fontsize=fontsize)
+    plt.ylabel(y_label, fontsize=fontsize)
 
     # Plot data
     markers = ["o", "v", "s", "X", "D"]
     for i in range(len(data)):
-        x, y, label = data[i]
+        x = data[i][0]
+        y = data[i][1]
+        label = data[i][2]
+        marker = markers[i] if len(data[i]) == 3 else ""
+        linestyle = "--" if len(data[i]) == 3 else "-"
 
-        plt.plot(
-            x,
-            y,
-            marker=markers[i],
-            markersize=10,
-            markeredgewidth=1,
-            markeredgecolor="black",
-            linestyle="",
-            label=label)
+        if(len(data[i]) == 3):
+            plt.plot(
+                x,
+                y,
+                marker=marker,
+                markersize=7,
+                #markeredgewidth=1,
+                #markeredgecolor="black",
+                linestyle=linestyle,
+                label=label)
+        else:
+            plt.plot(
+                x,
+                y,
+                marker=marker,
+                markersize=7,
+                #markeredgewidth=1,
+                #markeredgecolor="black",
+                linestyle=linestyle,
+                linewidth=2,
+                label=label,
+                color="black")
 
     plt.legend(frameon=True)
     plt.grid(linestyle="--")
 
     # Style
     ax = plt.gca()
-    ax.spines[["top", "right"]].set_visible(False)
-    ax.spines[["bottom", "left"]].set_linewidth(2)
-    ax.tick_params(labelsize=14)
+    #ax.spines[["top", "right"]].set_visible(False)
+    #ax.spines[["bottom", "left"]].set_linewidth(2)
+    ax.tick_params(labelsize=fontsize)
     plt.tight_layout()
 
+    plt.close(1)
     plt.show()
 
 def plot_heatmap(data, bins, x_label = "x [mm]", y_label = "z [mm]", top_cut = 0.0, bottom_cut = 0.0, side_cut = 0.0):
@@ -80,7 +101,6 @@ def plot_heatmap(data, bins, x_label = "x [mm]", y_label = "z [mm]", top_cut = 0
 
     plt.show()
     plt.close()
-
 
 def heatmap_subplots(*args, **kwargs):
     # Clear plot
